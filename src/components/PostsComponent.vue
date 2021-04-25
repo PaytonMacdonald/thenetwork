@@ -10,7 +10,7 @@
           </div>
           <div class="col">
             <h6> {{ post.creator.name }}</h6>
-            <p>time posted</p>
+            <p>{{ post.creator.createdAt }}</p>
           </div>
         </div>
       </div>

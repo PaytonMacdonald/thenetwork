@@ -2,25 +2,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-2 text-center bg-primary shadow profile-tall pt-5">
-        <span class="navbar-text">
-          <button
-            class="btn btn-outline-secondary text-uppercase"
-            @click="login"
-            v-if="!user.isAuthenticated"
-          >
-            Login
-          </button>
-          <div class="pb-3" v-else>
-            <img :src="user.picture" alt="user photo" height="100" class="rounded  mb-3" />
-            <p class="mb-3">{{ user.name }}</p>
-            <button class="btn btn-outline-secondary text-uppercase" @click="logout">
-              Logout
-            </button>
-          </div>
-
-        </span>
-      </div>
+      <Profile />
       <div class="col">
         <div class="row">
           <div class="col m-5">
@@ -48,15 +30,15 @@ import Posts from '../components/PostsComponent'
 import Promotion from '../components/PromotionsComponent'
 import { promotionsService } from '../services/PromotionsService'
 import { postsService } from '../services/PostsService'
-import { AuthService } from '../services/AuthService'
+
+import Profile from '../components/ProfileComponent'
 
 export default {
   name: 'Home',
   setup() {
     const state = reactive({
       promotions: computed(() => AppState.promotions),
-      posts: computed(() => AppState.posts),
-      dropOpen: false
+      posts: computed(() => AppState.posts)
     })
     onMounted(async() => {
       try {
@@ -67,19 +49,13 @@ export default {
       }
     })
     return {
-      state,
-      user: computed(() => AppState.user),
-      async login() {
-        AuthService.loginWithPopup()
-      },
-      async logout() {
-        await AuthService.logout({ returnTo: window.location.origin })
-      }
+      state
     }
   },
   components: {
     Promotion,
-    Posts
+    Posts,
+    Profile
   }
 }
 </script>
