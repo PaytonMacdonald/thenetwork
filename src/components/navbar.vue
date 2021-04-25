@@ -9,7 +9,7 @@
         />
       </div>
     </router-link>
-    <button
+    <!-- <button
       class="navbar-toggler"
       type="button"
       data-toggle="collapse"
@@ -19,8 +19,8 @@
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon" />
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
+    </button> -->
+    <!-- <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link :to="{ name: 'Home' }" class="nav-link">
@@ -74,19 +74,15 @@
           </div>
         </div>
       </span>
-    </div>
+    </div> -->
   </nav>
-  <!-- <div class="row bg-info">
-    <div class="col">
-      <span>NAVBAR</span>
-    </div>
-  </div> -->
 </template>
 
 <script>
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
+
 export default {
   name: 'Navbar',
   setup() {

@@ -1,7 +1,8 @@
 <!-------------------------------------------------------------------->
 
 <template>
-  <div class="col">
+  <div class="card m-5">
+    <span>this is the ProfileComponent</span>
   </div>
 </template>
 
@@ -9,7 +10,9 @@
 
 <script>
 export default {
-  name: 'Profile'
+  name: 'Profile',
+  setup() {
+  }
 }
 </script>
 

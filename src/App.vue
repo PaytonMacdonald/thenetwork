@@ -1,18 +1,15 @@
+<!------------------------------------------------------------------------>
+
 <template>
-  <header>
+  <header class="shadow">
     <Navbar />
   </header>
-  <main class="container-fluid">
-    <div class="row d-flex">
-      <div class="col-auto bg-primary shadow">
-        <span>PROFILES</span>
-      </div>
-      <div class="col-auto">
-        <router-view />
-      </div>
-    </div>
+
+  <main class="">
+    <router-view />
   </main>
-  <footer>
+
+  <footer class="">
     <div class="text-white container-fluid bg-info">
       <div class="row">
         <div class="col text-center">
@@ -22,6 +19,8 @@
     </div>
   </footer>
 </template>
+
+<!------------------------------------------------------------------------>
 
 <script>
 import { computed } from 'vue'
@@ -35,6 +34,11 @@ export default {
   }
 }
 </script>
+
+<!------------------------------------------------------------------------>
+
 <style lang="scss">
 @import "./assets/scss/main.scss";
 </style>
+
+<!------------------------------------------------------------------------>
