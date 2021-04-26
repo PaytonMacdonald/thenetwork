@@ -1,15 +1,17 @@
 <!---------------------------------------------------------------------------------------------------->
 <template>
+  <!-- REVIEW on refresh, ProfilePosts component will not load -->
   <div class="container-fluid">
     <div class="row">
-      <!-- <Profile /> -->
       <div class="col">
         <div class="row">
           <div class="col m-5">
-            <div>
-              <h4 class="text-center">
-                {{ state.activeProfile.name }}'s Posts
+            <div class="mb-5 text-center">
+              <img class="rounded-circle mb-3" :src="state.activeProfile.picture" alt="" width="150" height="150">
+              <h4 class="">
+                {{ state.activeProfile.name }}
               </h4>
+              <p>{{ state.activeProfile.email }}</p>
             </div>
             <ProfilePosts v-for="post in state.posts.posts" :key="post.id" :post="post" />
           </div>

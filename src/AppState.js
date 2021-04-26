@@ -9,5 +9,9 @@ export const AppState = reactive({
   activePosts: [],
   posts: {},
   promotions: [],
-  results: []
+  results: [],
+  // REVIEW how do I properly access likes and read the array length for likeCount?
+  likes: []
+  // Custom Data /////////////
+  // likeCount: this.likes.length
 })

@@ -8,7 +8,7 @@
           <div class="col-3">
             <div v-if="post">
               <router-link :to="{ name: 'Profiles', params: {id: post.creatorId}}">
-                <img class="rounded-circle mr-3" :src="post.creator.picture" alt="" width="75" height="75">
+                <img class="rounded-circle mr-3 shadow-sm" :src="post.creator.picture" alt="" width="75" height="75">
               </router-link>
             </div>
           </div>
@@ -25,6 +25,11 @@
     <div class="row">
       <div class="col text-center">
         <span>{{ post.body }}</span>
+      </div>
+      <div class="col-2">
+        <button @click="like(post.id)">
+          ^
+        </button> <span>likes 0</span>
       </div>
     </div>
     <div v-if="state.user.isAuthenticated && post.creatorId === state.account.id">
@@ -70,6 +75,15 @@ export default {
           Notification.toast('Post Deleted', 'success')
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
+        }
+      },
+      async like(id) {
+        try {
+          await postsService.likePost(id)
+          await postsService.getAllPosts()
+          Notification.toast('Post Liked', 'success')
+        } catch (error) {
+          Notification.toast('Unable to Like: ' + error, 'error')
         }
       }
     }

@@ -23,6 +23,10 @@ class PostsService {
     await api.post('api/posts/', data)
   }
 
+  async likePost(id) {
+    await api.post('api/posts/', id)
+  }
+
   async deletePost(id) {
     await api.delete('api/posts/' + id)
   }
