@@ -1,5 +1,6 @@
 <!---------------------------------------------------------------------------------------------------->
 <template>
+  <!-- REVIEW this page is not ready, it was just copied over from ProfilePage -->
   <div class="container-fluid">
     <div class="row">
       <!-- <Profile /> -->

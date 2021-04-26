@@ -6,6 +6,7 @@
   </div> -->
 
   <div class="container-fluid">
+    <!-- REVIEW on refresh, ProfilePosts component will not load -->
     <div class="row">
       <Profile :profile="state.account" />
       <div class="col">

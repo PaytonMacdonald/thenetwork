@@ -10,6 +10,16 @@
               Everyone's Posts
             </h4>
             <Posts v-for="post in state.posts.posts" :key="post.id" :post="post" />
+            <div class="row">
+              <div class="col d-flex justify-content-center">
+                <button class="mx-2">
+                  - prev
+                </button>
+                <button class="mx-2">
+                  next -
+                </button>
+              </div>
+            </div>
           </div>
           <div class="col-3 text-center mb-5">
             <Promotion v-for="promotion in state.promotions" :key="promotion.id" :promotion="promotion" />

@@ -1,6 +1,5 @@
 <!---------------------------------------------------------------------------------------------------->
 <template>
-  <!-- REVIEW on refresh, ProfilePosts component will not load -->
   <div class="container-fluid">
     <div class="row">
       <div class="col">

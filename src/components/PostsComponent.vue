@@ -26,10 +26,11 @@
       <div class="col text-center">
         <span>{{ post.body }}</span>
       </div>
+      <!-- REVIEW like button -->
       <div class="col-2">
         <button @click="like(post.id)">
           ^
-        </button> <span>likes 0</span>
+        </button> <span>likes {{ post.likes.length }}</span>
       </div>
     </div>
     <div v-if="state.user.isAuthenticated && post.creatorId === state.account.id">
@@ -77,6 +78,7 @@ export default {
           Notification.toast('Error: ' + error, 'error')
         }
       },
+      // REVIEW like function
       async like(id) {
         try {
           await postsService.likePost(id)
