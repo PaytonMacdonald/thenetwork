@@ -33,8 +33,6 @@ import ProfilePosts from '../components/ProfilePostsComponent'
 import Promotion from '../components/PromotionsComponent'
 import { promotionsService } from '../services/PromotionsService'
 import { postsService } from '../services/PostsService'
-// import Profile from '../components/ProfileComponent'
-// import { logger } from '../utils/Logger'
 
 import { profilesService } from '../services/ProfilesService'
 import { useRoute } from 'vue-router'
@@ -46,7 +44,6 @@ export default {
     const state = reactive({
       promotions: computed(() => AppState.promotions),
       posts: computed(() => AppState.activePosts),
-      // user: computed(() => AppState.user),
       activeProfile: computed(() => AppState.activeProfile)
     })
     onMounted(async() => {
@@ -60,26 +57,11 @@ export default {
     })
     return {
       state
-      // async createPost() {
-      //   try {
-      //     await postsService.create(state.newPost)
-      //     state.newPost = {}
-
-      //     // second party pop up
-      //     Notification.toast('Successfully Created Post', 'success')
-      //   } catch (error) {
-      //     logger.log(error)
-
-      //     // second party pop up
-      //     Notification.toast('Error: ' + error, 'error')
-      //   }
-      // },
     }
   },
   components: {
     Promotion,
     ProfilePosts
-    // Profile
   }
 }
 </script>

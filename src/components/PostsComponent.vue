@@ -83,7 +83,7 @@ export default {
         try {
           await postsService.likePost(id)
           await postsService.getAllPosts()
-          Notification.toast('Post Liked', 'success')
+          Notification.toast('Success', 'success')
         } catch (error) {
           Notification.toast('Unable to Like: ' + error, 'error')
         }

@@ -3,7 +3,6 @@
   <!-- REVIEW this page is not ready, it was just copied over from ProfilePage -->
   <div class="container-fluid">
     <div class="row">
-      <!-- <Profile /> -->
       <div class="col">
         <div class="row">
           <div class="col m-5">
@@ -29,15 +28,13 @@
 import { onMounted, reactive, computed } from 'vue'
 import Notification from '../utils/Notification'
 import { AppState } from '../AppState'
-// import Results from '../components/ResultsComponent'
 import Promotion from '../components/PromotionsComponent'
 import { promotionsService } from '../services/PromotionsService'
 import { postsService } from '../services/PostsService'
-// import Profile from '../components/ProfileComponent'
-// import { logger } from '../utils/Logger'
-
 import { profilesService } from '../services/ProfilesService'
 import { useRoute } from 'vue-router'
+
+// import Results from '../components/ResultsComponent'
 
 export default {
   name: 'Profile',
@@ -46,7 +43,6 @@ export default {
     const state = reactive({
       promotions: computed(() => AppState.promotions),
       posts: computed(() => AppState.results)
-      // user: computed(() => AppState.user),
     })
     onMounted(async() => {
       try {

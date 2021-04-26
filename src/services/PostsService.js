@@ -9,6 +9,16 @@ class PostsService {
     logger.log(res.data)
   }
 
+  async getNewerPosts() {
+    this.getAllPosts()
+  }
+
+  async getOlderPosts() {
+    const res = await api.get('api/posts?page=2')
+    AppState.posts = res.data
+    logger.log(res.data)
+  }
+
   async getByProfileId(id) {
     const res = await api.get(`api/posts?creatorId=${id}`)
     AppState.activePosts = res.data

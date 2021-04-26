@@ -10,16 +10,7 @@
               Everyone's Posts
             </h4>
             <Posts v-for="post in state.posts.posts" :key="post.id" :post="post" />
-            <div class="row">
-              <div class="col d-flex justify-content-center">
-                <button class="mx-2">
-                  - prev
-                </button>
-                <button class="mx-2">
-                  next -
-                </button>
-              </div>
-            </div>
+            <NewerOlder />
           </div>
           <div class="col-3 text-center mb-5">
             <Promotion v-for="promotion in state.promotions" :key="promotion.id" :promotion="promotion" />
@@ -36,12 +27,13 @@
 import { onMounted, reactive, computed } from 'vue'
 import Notification from '../utils/Notification'
 import { AppState } from '../AppState'
-import Posts from '../components/PostsComponent'
-import Promotion from '../components/PromotionsComponent'
 import { promotionsService } from '../services/PromotionsService'
 import { postsService } from '../services/PostsService'
-
 import Profile from '../components/ProfileComponent'
+import Posts from '../components/PostsComponent'
+import Promotion from '../components/PromotionsComponent'
+
+import NewerOlder from '../components/NewerOlderComponent'
 
 export default {
   name: 'Home',
@@ -66,6 +58,7 @@ export default {
   components: {
     Promotion,
     Posts,
+    NewerOlder,
     Profile
   }
 }
