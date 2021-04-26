@@ -8,10 +8,10 @@
           <div class="col m-5">
             <div>
               <h4 class="text-center">
-                {{ state.activeProfile.name }}'s Posts
+                results for search
               </h4>
             </div>
-            <ProfilePosts v-for="post in state.posts.posts" :key="post.id" :post="post" />
+            <Results v-for="post in state.posts.posts" :key="post.id" :post="post" />
           </div>
           <div class="col-3 text-center mb-5">
             <Promotion v-for="promotion in state.promotions" :key="promotion.id" :promotion="promotion" />
@@ -28,7 +28,7 @@
 import { onMounted, reactive, computed } from 'vue'
 import Notification from '../utils/Notification'
 import { AppState } from '../AppState'
-import ProfilePosts from '../components/ProfilePostsComponent'
+// import Results from '../components/ResultsComponent'
 import Promotion from '../components/PromotionsComponent'
 import { promotionsService } from '../services/PromotionsService'
 import { postsService } from '../services/PostsService'
@@ -44,9 +44,8 @@ export default {
     const route = useRoute()
     const state = reactive({
       promotions: computed(() => AppState.promotions),
-      posts: computed(() => AppState.activePosts),
+      posts: computed(() => AppState.results)
       // user: computed(() => AppState.user),
-      activeProfile: computed(() => AppState.activeProfile)
     })
     onMounted(async() => {
       try {
@@ -59,25 +58,11 @@ export default {
     })
     return {
       state
-      // async createPost() {
-      //   try {
-      //     await postsService.create(state.newPost)
-      //     state.newPost = {}
-
-      //     // second party pop up
-      //     Notification.toast('Successfully Created Post', 'success')
-      //   } catch (error) {
-      //     logger.log(error)
-
-      //     // second party pop up
-      //     Notification.toast('Error: ' + error, 'error')
-      //   }
-      // },
     }
   },
   components: {
-    Promotion,
-    ProfilePosts
+    Promotion
+    // ProfilePosts
     // Profile
   }
 }

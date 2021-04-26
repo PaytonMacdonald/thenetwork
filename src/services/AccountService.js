@@ -12,7 +12,9 @@ class AccountService {
     }
   }
 
-  // PUT function goes here '/account'
+  async editProfile(data) {
+    await api.put('account/', data)
+  }
 }
 
 export const accountService = new AccountService()

@@ -6,11 +6,7 @@
       <div class="col">
         <div class="row">
           <div class="col-3">
-            <div v-if="post">
-              <router-link :to="{ name: 'Profiles', params: {id: post.creatorId}}">
-                <img class="rounded-circle mr-3" :src="post.creator.picture" alt="" width="75" height="75">
-              </router-link>
-            </div>
+            <img class="rounded-circle mr-3" :src="post.creator.picture" alt="" width="75" height="75">
           </div>
           <div class="col">
             <h6> {{ post.creator.name }}</h6>
@@ -27,15 +23,17 @@
         <span>{{ post.body }}</span>
       </div>
     </div>
+    <!-- delete button -->
     <div v-if="state.user.isAuthenticated && post.creatorId === state.account.id">
       <div class="row">
         <div class="col">
-          <button type="submit" class="btn btn-secondary" @click="deletePost(post.id)">
+          <button type="submit" class="btn btn-secondary">
             delete post
           </button>
         </div>
       </div>
     </div>
+    <!--  -->
   </div>
 </template>
 
@@ -48,7 +46,7 @@ import { postsService } from '../services/PostsService'
 import Notification from '../utils/Notification'
 
 export default {
-  name: 'Posts',
+  name: 'MyProfilePosts',
   props: {
     post: {
       type: Object,
@@ -58,7 +56,7 @@ export default {
   setup(props) {
     const state = reactive({
       user: computed(() => AppState.user),
-      posts: computed(() => AppState.posts),
+      // posts: computed(() => AppState.posts),
       account: computed(() => AppState.account)
     })
     return {

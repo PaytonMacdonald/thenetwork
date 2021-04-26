@@ -2,7 +2,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <Profile />
+      <Profile :profile="state.account" />
       <div class="col">
         <div class="row">
           <div class="col m-5">
@@ -38,7 +38,8 @@ export default {
   setup() {
     const state = reactive({
       promotions: computed(() => AppState.promotions),
-      posts: computed(() => AppState.posts)
+      posts: computed(() => AppState.posts),
+      account: computed(() => AppState.account)
     })
     onMounted(async() => {
       try {

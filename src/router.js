@@ -6,15 +6,23 @@ function loadPage(page) {
 }
 
 const routes = [
+  // //////////////////////////////////////////////
+  {
+    path: '/account',
+    name: 'Account',
+    component: loadPage('AccountPage'),
+    beforeEnter: authGuard // this line is the reason why not logged in can't see it
+  },
+  {
+    path: '/profiles/:id',
+    name: 'Profiles',
+    component: loadPage('ProfilePage')
+  },
+  // //////////////////////////////////////////////////////////////////
   {
     path: '/',
     name: 'Home',
     component: loadPage('HomePage')
-  },
-  {
-    path: '/profile/',
-    name: 'Profile',
-    component: loadPage('ProfilePage')
   },
   {
     path: '/about',
@@ -22,10 +30,8 @@ const routes = [
     component: loadPage('AboutPage')
   },
   {
-    path: '/account',
-    name: 'Account',
-    component: loadPage('AccountPage'),
-    beforeEnter: authGuard // this line is the reason why not logged in can't see it
+    path: '/post/:id',
+    name: 'PostDetails'
   }
 ]
 

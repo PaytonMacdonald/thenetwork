@@ -9,72 +9,33 @@
         />
       </div>
     </router-link>
-    <!-- <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon" />
-    </button> -->
-    <!-- <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link :to="{ name: 'Home' }" class="nav-link">
-            Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
-            About
-          </router-link>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <button
-          class="btn btn-outline-primary text-uppercase"
-          @click="login"
-          v-if="!user.isAuthenticated"
-        >
-          Login
-        </button>
-
-        <div class="dropdown" v-else>
-          <div
-            class="dropdown-toggle"
-            @click="state.dropOpen = !state.dropOpen"
-          >
-            <img
-              :src="user.picture"
-              alt="user photo"
-              height="40"
-              class="rounded"
-            />
-            <span class="mx-3">{{ user.name }}</span>
-          </div>
-          <div
-            class="dropdown-menu p-0 list-group w-100"
-            :class="{ show: state.dropOpen }"
-            @click="state.dropOpen = false"
-          >
-            <router-link :to="{ name: 'Account' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Account
-              </div>
-            </router-link>
-            <div
-              class="list-group-item list-group-item-action hoverable"
-              @click="logout"
+    <router-link :to="{ name: 'Home'}">
+      <span class="px-1">home</span>
+    </router-link>
+    <router-link :to="{ name: 'Account'}">
+      <span class="px-1">profile</span>
+    </router-link>
+    <div class="col d-flex justify-content-right">
+      <!-- search bar -->
+      <form @submit.prevent="search">
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <input type="text"
+                   class="form-control"
+                   id="inlineFormInput"
+                   placeholder="find someone"
+                   v-model="state.query"
             >
-              logout
-            </div>
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-secondary">
+              <i class="fas fa-search-location    ">Search</i>
+            </button>
           </div>
         </div>
-      </span>
-    </div> -->
+      </form>
+      <!-- ----- -->
+    </div>
   </nav>
 </template>
 
@@ -82,15 +43,26 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
+import { postsService } from '../services/PostsService'
+// import Notification from '../utils/Notification'
 
 export default {
   name: 'Navbar',
   setup() {
     const state = reactive({
+      query: '',
       dropOpen: false
     })
     return {
       state,
+      async search() {
+        try {
+          await postsService.getProfilesSearch(state.query)
+          state.query = ''
+        } catch (error) {
+          Notification.toast('Error:' + error, 'error')
+        }
+      },
       user: computed(() => AppState.user),
       async login() {
         AuthService.loginWithPopup()
