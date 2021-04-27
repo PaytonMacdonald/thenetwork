@@ -15,6 +15,9 @@
             <h4 class="text-center">
               Your Posts
             </h4>
+            <button class="p-1" @click="getMyPosts">
+              manual getMyPosts
+            </button>
             <!-- CREATE POST -->
             <form class="mb-5" @submit.prevent="createPost">
               <div class="form-group">
@@ -59,12 +62,9 @@ import AccountPosts from '../components/AccountPostsComponent'
 import Promotion from '../components/PromotionsComponent'
 import { promotionsService } from '../services/PromotionsService'
 import { postsService } from '../services/PostsService'
-// import { profilesService } from '../services/ProfilesService'
 import Profile from '../components/ProfileComponent'
 
-// import { logger } from '../utils/Logger'
-// import { accountService } from '../services/AccountService'
-// import { useRoute } from 'vue-router'
+import { logger } from '../utils/Logger'
 
 export default {
   name: 'Home',
@@ -80,7 +80,8 @@ export default {
     })
     onMounted(async() => {
       try {
-        await postsService.getMyPosts()
+        logger.log('on mounted runs in the try')
+        await postsService.getMyPosts() // this line fails for some reason
         await promotionsService.getPromotions()
       } catch (error) {
         Notification.toast('Error:' + error, 'error')
@@ -89,6 +90,14 @@ export default {
     return {
       state,
 
+      async getMyPosts() {
+        try {
+          await postsService.getMyPosts()
+          Notification.toast('Added Post', 'success')
+        } catch (error) {
+          Notification.toast('Error: ' + error, 'error')
+        }
+      },
       async createPost() {
         try {
           await postsService.createPost(state.newPost)

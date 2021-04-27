@@ -9,10 +9,9 @@ class PostsService {
     logger.log(res.data)
   }
 
-  async nextPosts() {
-    const res = await api.get(`${AppState.posts.older}`) // instead of manual link just get the thingy IN the api
+  async nextPosts(data) {
+    const res = await api.get(data)
     AppState.posts = res.data
-    logger.log(res.data)
   }
 
   async getByProfileId(id) {
