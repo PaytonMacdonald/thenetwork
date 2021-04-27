@@ -28,3 +28,6 @@ DELETE https://bcw-sandbox.herokuapp.com/api/posts/:id (deletepost)
 
 Ads
 GET https://bcw-sandbox.herokuapp.com/api/ads (getads THIS IS DONEZO)
+
+
+010837a6-8398-4a1c-b3dc-fe5dea2ffebc

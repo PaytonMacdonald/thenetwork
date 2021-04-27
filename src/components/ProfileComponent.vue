@@ -12,10 +12,10 @@
       </button>
       <div class="pb-3" v-else>
         <router-link :to="{ name: 'Account'}">
-          <img :src="profile.picture" alt="user photo" height="100" class="rounded-circle mb-3 shadow-sm" />
+          <img :src="state.account.picture" alt="user photo" height="100" class="rounded-circle mb-3 shadow-sm" />
         </router-link>
         <p class="mb-3">
-          {{ profile.name }}
+          {{ state.account.name }}
         </p>
         <p>
           <button class="btn btn-outline-secondary text-uppercase" @click="logout">
@@ -102,7 +102,8 @@ export default {
   setup() {
     const state = reactive({
       profileEdits: {},
-      dropOpen: false
+      dropOpen: false,
+      account: computed(() => AppState.account)
     })
     return {
       state,
@@ -112,6 +113,7 @@ export default {
           await accountService.editProfile(state.profileEdits)
           state.profileEdits = {}
           Notification.toast('Profile Changed!', 'success')
+          // reDraw the profile
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
         }

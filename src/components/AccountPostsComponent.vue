@@ -6,7 +6,7 @@
       <div class="col">
         <div class="row">
           <div class="col-3">
-            <img class="rounded-circle mr-3" :src="post.creator.picture" alt="" width="75" height="75">
+            <img class="rounded-circle mr-3 shadow-sm" :src="post.creator.picture" alt="" width="75" height="75">
           </div>
           <div class="col">
             <h6> {{ post.creator.name }}</h6>
@@ -50,21 +50,19 @@ import { AppState } from '../AppState'
 import { postsService } from '../services/PostsService'
 import { profilesService } from '../services/ProfilesService'
 import Notification from '../utils/Notification'
-import { useRoute } from 'vue-router'
 
 export default {
-  name: 'ProfilePosts',
+  name: 'AccountProfilePosts',
   props: {
     post: {
       type: Object,
       required: true
     }
   },
-  setup(props) {
-    const route = useRoute()
+  setup() {
     const state = reactive({
+      posts: computed(() => AppState.posts),
       user: computed(() => AppState.user),
-      // posts: computed(() => AppState.posts),
       account: computed(() => AppState.account)
     })
     return {
@@ -72,8 +70,8 @@ export default {
       async deletePost(id) {
         try {
           await postsService.deletePost(id)
-          await profilesService.getActiveProfile(route.params.id)
-          await postsService.getByProfileId(route.params.id)
+          await profilesService.getActiveProfile(AppState.account.id)
+          await postsService.getByProfileId(AppState.account.id)
           Notification.toast('Post Deleted', 'success')
         } catch (error) {
           Notification.toast('Error: ' + error, 'error')
@@ -82,8 +80,8 @@ export default {
       async like(id) {
         try {
           await postsService.likePost(id)
-          await profilesService.getActiveProfile(route.params.id)
-          await postsService.getByProfileId(route.params.id)
+          await profilesService.getActiveProfile(AppState.account.id)
+          await postsService.getByProfileId(AppState.account.id)
           Notification.toast('Success', 'success')
         } catch (error) {
           Notification.toast('Unable to Like: ' + error, 'error')

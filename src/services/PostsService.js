@@ -9,18 +9,19 @@ class PostsService {
     logger.log(res.data)
   }
 
-  async getNewerPosts() {
-    this.getAllPosts()
-  }
-
-  async getOlderPosts() {
-    const res = await api.get('api/posts?page=2')
+  async nextPosts() {
+    const res = await api.get(`${AppState.posts.older}`) // instead of manual link just get the thingy IN the api
     AppState.posts = res.data
     logger.log(res.data)
   }
 
   async getByProfileId(id) {
     const res = await api.get(`api/posts?creatorId=${id}`)
+    AppState.activePosts = res.data
+  }
+
+  async getMyPosts() {
+    const res = await api.get(`api/posts?creatorId=${AppState.account.id}`)
     AppState.activePosts = res.data
   }
 

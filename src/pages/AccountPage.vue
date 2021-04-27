@@ -39,7 +39,7 @@
                 Post
               </button>
             </form>
-            <ProfilePosts v-for="post in state.posts.posts" :key="post.id" :post="post" />
+            <AccountPosts v-for="post in state.posts.posts" :key="post.id" :post="post" />
           </div>
           <!-- ---------- -->
           <div class="col-3 text-center mb-5">
@@ -55,10 +55,11 @@
 import { onMounted, reactive, computed } from 'vue'
 import Notification from '../utils/Notification'
 import { AppState } from '../AppState'
-import ProfilePosts from '../components/ProfilePostsComponent'
+import AccountPosts from '../components/AccountPostsComponent'
 import Promotion from '../components/PromotionsComponent'
 import { promotionsService } from '../services/PromotionsService'
 import { postsService } from '../services/PostsService'
+// import { profilesService } from '../services/ProfilesService'
 import Profile from '../components/ProfileComponent'
 
 // import { logger } from '../utils/Logger'
@@ -70,18 +71,17 @@ export default {
   setup() {
     // const route = useRoute()
     const state = reactive({
+      account: computed(() => AppState.account),
       newPost: {},
-      promotions: computed(() => AppState.promotions),
-      posts: computed(() => AppState.activePosts),
       user: computed(() => AppState.user),
+      posts: computed(() => AppState.activePosts),
       activeProfile: computed(() => AppState.activeProfile),
-      account: computed(() => AppState.account)
+      promotions: computed(() => AppState.promotions)
     })
     onMounted(async() => {
       try {
-        // await accountService.getAccount()
+        await postsService.getMyPosts()
         await promotionsService.getPromotions()
-        await postsService.getByProfileId(AppState.account.id)
       } catch (error) {
         Notification.toast('Error:' + error, 'error')
       }
@@ -103,7 +103,7 @@ export default {
   },
   components: {
     Promotion,
-    ProfilePosts,
+    AccountPosts,
     Profile
   }
 }

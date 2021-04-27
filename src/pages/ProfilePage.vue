@@ -42,9 +42,9 @@ export default {
   setup() {
     const route = useRoute()
     const state = reactive({
-      promotions: computed(() => AppState.promotions),
       posts: computed(() => AppState.activePosts),
-      activeProfile: computed(() => AppState.activeProfile)
+      activeProfile: computed(() => AppState.activeProfile),
+      promotions: computed(() => AppState.promotions)
     })
     onMounted(async() => {
       try {
